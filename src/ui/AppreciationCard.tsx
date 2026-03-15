@@ -12,6 +12,7 @@ import { exportFullCardAsPNG } from '../exports/imageExporter';
 import { Renderer } from '../core/renderer';
 import { PostProcessor } from '../core/postProcessor';
 import { Button } from './Button';
+import { analytics } from '../utils/analytics';
 import './AppreciationCard.css';
 
 interface AppreciationCardProps {
@@ -121,6 +122,7 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
 
   const handleDownload = async () => {
     if (miniCanvasRef.current) {
+      analytics.track('download_appreciation_card');
       exportFullCardAsPNG(
         miniCanvasRef.current,
         userName,

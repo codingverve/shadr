@@ -12,6 +12,7 @@ import { videoExporter } from '../exports/videoExporter';
 import { PresetPanel } from './PresetPanel';
 import { getRandomBeautifulPalette, getRandomValue } from '../utils/surpriseUtils';
 import { Button } from './Button';
+import { analytics } from '../utils/analytics';
 import './Header.css';
 
 export function Header() {
@@ -23,6 +24,7 @@ export function Header() {
   const handleExport = () => {
     const canvas = document.querySelector<HTMLCanvasElement>('.shader-canvas');
     if (canvas) {
+      analytics.track('export_png', { engine: activeEngine?.name });
       exportCanvasAsPNG(canvas, `${activeEngine?.id ?? 'pattern'}-${Date.now()}.png`);
     }
   };
@@ -48,6 +50,8 @@ export function Header() {
         colorIdx++;
       }
     });
+
+    analytics.track('surprise_me', { engine: randomEngine.name });
   };
 
   const handleRecord = () => {
@@ -68,6 +72,7 @@ export function Header() {
         
         if (count === 0) {
           clearInterval(timer);
+          analytics.track('record_video_start');
           videoExporter.start(canvas, 30);
           setIsRecording(true);
         }
