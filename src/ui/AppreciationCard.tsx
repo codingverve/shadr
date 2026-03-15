@@ -173,7 +173,6 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
                 </div>
               </div>
             </div>
-            <p className="preview-hint">Live Preview (Pixel-Perfect Download)</p>
           </div>
 
           {/* Right: Properties Section */}
@@ -183,51 +182,53 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
               <p className="panel-subtitle">Make it truly yours</p>
             </div>
 
-            <div className="prop-section">
-              <div className="prop-section-label">Profile</div>
-              <div className="prop-group">
-                <div className="prop-field">
-                  <span>What should we call you?</span>
-                  <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Akashdeep Singh" />
-                </div>
-                <div className="prop-field">
-                  <span>What’s your craft?</span>
-                  <input type="text" value={userRole} onChange={(e) => setUserRole(e.target.value)} placeholder="Product Designer" />
-                </div>
-                <div className="prop-field">
-                  <span>Tell us a little about your craft</span>
-                  <textarea value={userBio} onChange={(e) => setUserBio(e.target.value)} placeholder="Designing thoughtful digital experiences..." rows={3} />
-                </div>
-              </div>
-            </div>
-
-            <div className="prop-section">
-              <div className="prop-section-label">Appearance</div>
-              <div className="prop-group">
-                <div className="prop-sub-group">
-                  <span className="sub-group-label">Background</span>
-                  <div className="color-grid">
-                    <div className="color-field">
-                      <input type="color" id="cardBg" value={cardBg} onChange={(e) => setCardBg(e.target.value)} />
-                      <label htmlFor="cardBg">Card BG</label>
-                    </div>
+            <div className="card-properties-content">
+              <div className="prop-section">
+                <div className="prop-section-label">Profile</div>
+                <div className="prop-group">
+                  <div className="prop-field">
+                    <span>What should we call you?</span>
+                    <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Akashdeep Singh" />
+                  </div>
+                  <div className="prop-field">
+                    <span>What’s your craft?</span>
+                    <input type="text" value={userRole} onChange={(e) => setUserRole(e.target.value)} placeholder="Product Designer" />
+                  </div>
+                  <div className="prop-field">
+                    <span>Tell us a little about your craft</span>
+                    <textarea value={userBio} onChange={(e) => setUserBio(e.target.value)} placeholder="Designing thoughtful digital experiences..." rows={3} />
                   </div>
                 </div>
+              </div>
 
-                <div className="prop-sub-group">
-                  <span className="sub-group-label">Typography</span>
-                  <div className="color-grid">
-                    <div className="color-field">
-                      <input type="color" id="nameColor" value={nameColor} onChange={(e) => setNameColor(e.target.value)} />
-                      <label htmlFor="nameColor">Title</label>
+              <div className="prop-section">
+                <div className="prop-section-label">Appearance</div>
+                <div className="prop-group">
+                  <div className="prop-sub-group">
+                    <span className="sub-group-label">Background</span>
+                    <div className="color-grid">
+                      <div className="color-field">
+                        <input type="color" id="cardBg" value={cardBg} onChange={(e) => setCardBg(e.target.value)} />
+                        <label htmlFor="cardBg">Card BG</label>
+                      </div>
                     </div>
-                    <div className="color-field">
-                      <input type="color" id="roleColor" value={roleColor} onChange={(e) => setRoleColor(e.target.value)} />
-                      <label htmlFor="roleColor">Subtitle</label>
-                    </div>
-                    <div className="color-field">
-                      <input type="color" id="bioColor" value={bioColor} onChange={(e) => setBioColor(e.target.value)} />
-                      <label htmlFor="bioColor">Bio Text</label>
+                  </div>
+
+                  <div className="prop-sub-group">
+                    <span className="sub-group-label">Typography</span>
+                    <div className="color-grid">
+                      <div className="color-field">
+                        <input type="color" id="nameColor" value={nameColor} onChange={(e) => setNameColor(e.target.value)} />
+                        <label htmlFor="nameColor">Title</label>
+                      </div>
+                      <div className="color-field">
+                        <input type="color" id="roleColor" value={roleColor} onChange={(e) => setRoleColor(e.target.value)} />
+                        <label htmlFor="roleColor">Subtitle</label>
+                      </div>
+                      <div className="color-field">
+                        <input type="color" id="bioColor" value={bioColor} onChange={(e) => setBioColor(e.target.value)} />
+                        <label htmlFor="bioColor">Bio Text</label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -237,6 +238,7 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
             <div className="prop-actions">
               <Button
                 variant="primary"
+                className="download-btn-card"
                 fullWidth
                 size="lg"
                 onClick={handleDownload}
