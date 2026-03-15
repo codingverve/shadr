@@ -39,6 +39,12 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
   const miniCanvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<Renderer | null>(null);
   const postProcessorRef = useRef<PostProcessor | null>(null);
+  const parametersRef = useRef(parameters);
+  const postFxRef = useRef(postFx);
+
+  // Sync refs
+  parametersRef.current = parameters;
+  postFxRef.current = postFx;
 
   // Mouse Tilt Logic (using CSS variables for performance)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -84,17 +90,19 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
         const time = performance.now() / 1000;
         const canvas = r.getCanvas();
         const vao = r.getVAO();
+        const fx = postFxRef.current;
+        const params = parametersRef.current;
 
-        if (pp.isActive(postFx) && vao) {
+        if (pp.isActive(fx) && vao) {
           pp.resize(canvas.width, canvas.height);
           pp.beginScene();
           r.renderFrame(time, (rend) => {
-            activeEngine.updateUniforms(rend, parameters);
+            activeEngine.updateUniforms(rend, params);
           });
-          pp.endScene(vao, time, canvas.width, canvas.height, postFx);
+          pp.endScene(vao, time, canvas.width, canvas.height, fx);
         } else {
           r.renderFrame(time, (rend) => {
-            activeEngine.updateUniforms(rend, parameters);
+            activeEngine.updateUniforms(rend, params);
           });
         }
         
@@ -109,7 +117,7 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
         postProcessorRef.current = null;
       };
     }
-  }, [activeEngine, parameters]);
+  }, [activeEngine]); // Only re-run when engine changes
 
   const handleDownload = async () => {
     if (miniCanvasRef.current) {

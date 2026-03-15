@@ -71,6 +71,7 @@ void main() {
   uv.x *= aspect;
   
   float t = u_time * u_speed;
+  vec2 p = uv * u_scale;
   float n = ridgedFBM(p);
   
   // Apply brightness and contrast
