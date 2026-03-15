@@ -87,13 +87,13 @@ export function exportFullCardAsPNG(
 
   // 4. Draw Text Content
   ctx.textBaseline = 'top';
-  const hPadding = 16 * 2;
-  const vPadding = 32 * 2;
+  const hPadding = 24 * 2; // Match CSS 24px
+  const vPadding = 32 * 2; // Match CSS 32px (padding-top)
   const maxWidth = cardWidth - (hPadding * 2);
   let currentY = previewHeight + vPadding;
   
-  // Name (Inter Bold) - Matching 2.2rem (35.2px approx) -> ~70px @ 2x
-  let nameSize = 72;
+  // Name (Inter Bold) - Matching 2.4rem -> ~76px @ 2x
+  let nameSize = 76;
   ctx.fillStyle = nameColor;
   ctx.font = `800 ${nameSize}px Inter, sans-serif`;
   
@@ -104,20 +104,21 @@ export function exportFullCardAsPNG(
   }
   
   ctx.fillText(name, hPadding, currentY);
-  currentY += nameSize + 12; // Gap
+  currentY += nameSize + 24; // Match CSS gap: 12px (24px @ 2x)
 
-  // Role - Matching 1rem -> ~16px -> 32px @ 2x
+  // Role - Matching 1.1rem -> ~35px @ 2x
+  const roleSize = 35;
   ctx.fillStyle = roleColor;
-  ctx.font = '600 32px Inter, sans-serif';
+  ctx.font = `600 ${roleSize}px Inter, sans-serif`;
   ctx.fillText(role, hPadding, currentY);
-  currentY += 44; // Spacing
+  currentY += roleSize + 40; // Match CSS gap: 12px + bio margin-top: 8px (40px @ 2x)
 
-  // Bio Description (Wrapping) - Matching 0.9rem -> ~14.4px -> 29px @ 2x
+  // Bio Description (Wrapping) - Matching 0.95rem -> ~31px @ 2x
   ctx.fillStyle = bioColor;
-  ctx.font = '400 29px Inter, sans-serif';
+  ctx.font = '400 31px Inter, sans-serif';
   const words = bio.split(' ');
   let line = '';
-  const lineHeight = 44; // ~1.5 line height
+  const lineHeight = 50; // Match 1.6 line-height
 
   for (let n = 0; n < words.length; n++) {
     const testLine = line + words[n] + ' ';
