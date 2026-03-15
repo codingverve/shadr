@@ -1,0 +1,90 @@
+/* Timeline Styles */
+
+.timeline {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Match Header's layout pattern */
+  padding: 0 24px;
+  background: rgba(10, 10, 15, 0.75);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.timeline-scrub {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the scrub bar */
+  gap: 12px;
+  padding: 0 40px;
+}
+
+.timeline-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-range {
+  width: 100%;
+  max-width: 400px;
+  height: 3px;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  outline: none;
+}
+
+.timeline-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid #111;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+}
+
+.timeline-value {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 700;
+  min-width: 32px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.9;
+}
+
+.timeline-speed {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 120px;
+  justify-content: flex-end;
+}
+
+.timeline-speed-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.timeline-speed-btn-override {
+  padding: 0 10px !important;
+  min-width: 42px;
+  font-size: 0.75rem !important;
+}

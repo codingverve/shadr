@@ -1,0 +1,295 @@
+.card-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-editor-modal {
+  width: 1000px;
+  /* Slightly wider for better balance */
+  max-width: 95vw;
+  height: 750px;
+  background: #0a0a0a;
+  border-radius: 32px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  animation: modalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  z-index: 20;
+}
+
+.card-editor-layout {
+  display: flex;
+  height: 100%;
+}
+
+/* Left: Card Preview Section */
+.card-preview-section {
+  flex: 1.6;
+  /* More prominence to the card */
+  background: radial-gradient(circle at 40% 40%, #1e1e1e 0%, #0a0a0a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px;
+  /* Increased padding */
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.preview-stage {
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 40px;
+  /* Offset for the hint text */
+}
+
+.card-mockup {
+  width: 440px;
+  height: 600px;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    0 40px 100px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+
+  /* Use CSS variables for 3D Tilt with a flat default */
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-shader-area {
+  height: 350px;
+  background: #000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-mini-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.card-text-area {
+  padding: 32px 24px;
+  /* More horizontal padding */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-name {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 2.4rem;
+  /* Slightly larger */
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.preview-role {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.preview-bio {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 8px 0 0 0;
+  opacity: 0.6;
+}
+
+.preview-hint {
+  position: absolute;
+  bottom: 40px;
+  font-size: 0.75rem;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+}
+
+/* Right: Properties Section */
+.card-properties-section {
+  flex: 1;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px; /* Increased for better separation */
+  overflow-y: auto;
+  background: #0a0a0a;
+}
+
+.panel-header {
+  margin-bottom: -8px;
+}
+
+.panel-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.panel-subtitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 4px 0 0 0;
+}
+
+.prop-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.prop-section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #3b82f6; /* Accent color for section headers */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.prop-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.prop-sub-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sub-group-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prop-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prop-field span {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.prop-field input,
+.prop-field textarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.prop-field input:focus,
+.prop-field textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.color-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.color-field:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.color-field input[type="color"] {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.color-field label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.prop-actions {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

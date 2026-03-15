@@ -1,0 +1,89 @@
+/* PostFX Panel Styles */
+
+.postfx-panel {
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+.postfx-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s ease;
+}
+
+.postfx-panel-header:hover {
+  background: var(--surface-2);
+}
+
+.postfx-panel-chevron {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  width: 12px;
+}
+
+.postfx-panel-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.postfx-panel-reset {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.postfx-panel-reset:hover {
+  background: var(--surface-2);
+  color: var(--text-primary);
+}
+
+.postfx-panel-controls {
+  padding: 2px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.postfx-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.postfx-toggle-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.postfx-toggle-btn {
+  padding: 3px 12px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.postfx-toggle-btn:hover {
+  border-color: var(--accent);
+}
+
+.postfx-toggle-btn.active {
+  background: var(--accent-dim);
+}
