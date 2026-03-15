@@ -89,10 +89,5 @@ export function getUniformLocation(
   program: WebGLProgram,
   name: string
 ): WebGLUniformLocation | null {
-  const location = gl.getUniformLocation(program, name);
-  if (location === null) {
-    // Only warn once per uniform — some may be optimized out by the compiler
-    console.warn(`[ShaderCompiler] Uniform '${name}' not found (may be optimized out)`);
-  }
-  return location;
+  return gl.getUniformLocation(program, name);
 }
