@@ -7,6 +7,8 @@
   align-items: center;
   justify-content: center;
   z-index: 2000;
+  padding: 40px 20px; /* Added spacing from edges */
+  overflow-y: auto; /* Allow scroll on small screens */
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -142,10 +144,10 @@
 /* Right: Properties Section */
 .card-properties-section {
   flex: 1;
-  padding: 48px;
+  padding: 60px 48px 48px; /* Increased top padding from 48px to 60px */
   display: flex;
   flex-direction: column;
-  gap: 48px; /* Increased for better separation */
+  gap: 48px;
   overflow-y: auto;
   background: #0a0a0a;
 }
