@@ -10,6 +10,7 @@ import { useAppStore } from '../app/store';
 import { Download, X } from 'lucide-react';
 import { exportFullCardAsPNG } from '../exports/imageExporter';
 import { Renderer } from '../core/renderer';
+import { PostProcessor } from '../core/postProcessor';
 import { Button } from './Button';
 import './AppreciationCard.css';
 
@@ -20,6 +21,7 @@ interface AppreciationCardProps {
 export function AppreciationCard({ onClose }: AppreciationCardProps) {
   const activeEngine = useAppStore((s) => s.activeEngine);
   const parameters = useAppStore((s) => s.parameters);
+  const postFx = useAppStore((s) => s.postFx);
 
   // Content State
   const [userName, setUserName] = useState('Akashdeep Singh');
@@ -36,6 +38,7 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const miniCanvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<Renderer | null>(null);
+  const postProcessorRef = useRef<PostProcessor | null>(null);
 
   // Mouse Tilt Logic (using CSS variables for performance)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -70,18 +73,40 @@ export function AppreciationCard({ onClose }: AppreciationCardProps) {
       renderer.loadShader(activeEngine.fragmentShader);
       rendererRef.current = renderer;
 
+      const postProcessor = new PostProcessor(renderer.getContext());
+      postProcessorRef.current = postProcessor;
+
       const render = () => {
-        if (!rendererRef.current) return;
-        rendererRef.current.renderFrame(performance.now() / 1000, (r) => {
-          activeEngine.updateUniforms(r, parameters);
-        });
+        const r = rendererRef.current;
+        const pp = postProcessorRef.current;
+        if (!r || !pp) return;
+        
+        const time = performance.now() / 1000;
+        const canvas = r.getCanvas();
+        const vao = r.getVAO();
+
+        if (pp.isActive(postFx) && vao) {
+          pp.resize(canvas.width, canvas.height);
+          pp.beginScene();
+          r.renderFrame(time, (rend) => {
+            activeEngine.updateUniforms(rend, parameters);
+          });
+          pp.endScene(vao, time, canvas.width, canvas.height, postFx);
+        } else {
+          r.renderFrame(time, (rend) => {
+            activeEngine.updateUniforms(rend, parameters);
+          });
+        }
+        
         requestAnimationFrame(render);
       };
       const animId = requestAnimationFrame(render);
       return () => {
         cancelAnimationFrame(animId);
+        postProcessor.dispose();
         renderer.dispose();
         rendererRef.current = null;
+        postProcessorRef.current = null;
       };
     }
   }, [activeEngine, parameters]);
