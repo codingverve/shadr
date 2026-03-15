@@ -4,11 +4,11 @@
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(12px);
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Changed from start for better compatibility */
   justify-content: center;
   z-index: 2000;
-  padding: 40px 20px; /* Added spacing from edges */
-  overflow-y: auto; /* Allow scroll on small screens */
+  padding: 80px 20px 40px 20px; /* Increased top padding to 80px for better vertical rhythm */
+  overflow-y: auto;
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -51,8 +51,8 @@
   justify-content: center;
   position: relative;
   padding: 60px;
-  /* Increased padding */
   border-right: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden; /* Prevent any internal scrolling on the preview side */
 }
 
 .preview-stage {
@@ -144,7 +144,8 @@
 /* Right: Properties Section */
 .card-properties-section {
   flex: 1;
-  padding: 60px 48px 48px; /* Increased top padding from 48px to 60px */
+  padding: 60px 48px 48px;
+  /* Increased top padding from 48px to 60px */
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -180,7 +181,8 @@
 .prop-section-label {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #3b82f6; /* Accent color for section headers */
+  color: #3b82f6;
+  /* Accent color for section headers */
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding-bottom: 8px;
