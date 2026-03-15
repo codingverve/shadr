@@ -5,7 +5,7 @@
  * Registers all 29 pattern engines on mount.
  */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppStore } from './store';
 import { createSimplexNoiseEngine } from '../features/noise-engine/simplexNoiseEngine';
 import { createPerlinEngine } from '../features/perlin-engine/perlinEngine';
@@ -42,6 +42,7 @@ import { EngineSelector } from '../ui/EngineSelector';
 import { ControlPanel } from '../ui/ControlPanel';
 import { Timeline } from '../ui/Timeline';
 import { AppreciationCard } from '../ui/AppreciationCard';
+import { MobileBlock } from '../ui/MobileBlock';
 import './App.css';
 
 export function App() {
@@ -49,6 +50,15 @@ export function App() {
   const registerEngine = useAppStore((s) => s.registerEngine);
   const showCard = useAppStore((s) => s.showCard);
   const setShowCard = useAppStore((s) => s.setShowCard);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const engines = [
@@ -105,6 +115,7 @@ export function App() {
 
   return (
     <div className="app">
+      {isMobile && <MobileBlock />}
       <Header />
       <main className="app-main">
         <EngineSelector />
