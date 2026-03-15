@@ -6,7 +6,7 @@
  */
 
 import { useState } from 'react';
-import { ChevronDown, ChevronRight, Layers, Box } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useAppStore } from '../app/store';
 import type { PatternEngine } from '../core/types';
 import './EngineSelector.css';
