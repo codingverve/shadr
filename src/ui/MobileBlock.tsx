@@ -6,6 +6,8 @@ export function MobileBlock() {
 
   useEffect(() => {
     if (videoRef.current) {
+      // Some mobile browsers are very strict about the muted property being set on the element
+      videoRef.current.muted = true;
       videoRef.current.play().catch(err => {
         console.warn("Video autostart failed:", err);
       });
@@ -25,9 +27,12 @@ export function MobileBlock() {
             loop 
             muted 
             playsInline
-            src={videoSrc}
+            preload="auto"
             className="mobile-meme"
-          />
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
         <h1 className="mobile-caption">kuch bhi ab shader bhi mobile mein chaloge</h1>
         <p className="mobile-subtext">Open on Desktop or Tablet for the full GPU-accelerated experience.</p>
