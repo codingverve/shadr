@@ -7,7 +7,7 @@
   align-items: flex-start; /* Changed from start for better compatibility */
   justify-content: center;
   z-index: 2000;
-  padding: 80px 20px 40px 20px; /* Increased top padding to 80px for better vertical rhythm */
+  padding: 40px 20px 40px 20px; /* Reduced top padding to 40px */
   overflow-y: auto;
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
